@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="search">Search</string>
+    <string name="city_name">City Name</string>
+    <string name="temperature">Temperature</string>
+    <string name="weatherimage">WeatherImage</string>
+    <string name="search_history">search history</string>
+    <string-array name="cities">
+        <item>Biaroza</item>
+        <item>Minsk</item>
+        <item>Brest</item>
+    </string-array>
+</resources>
