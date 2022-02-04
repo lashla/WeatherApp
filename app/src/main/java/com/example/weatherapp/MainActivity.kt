@@ -19,14 +19,22 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        textInput = findViewById(R.id.textInput)
+        val enteredCityName: TextView = findViewById(R.id.enteredCityName)
+        findViewById<EditText?>(R.id.textInput).setOnEditorActionListener { v, actionId, event ->
+            return@setOnEditorActionListener when (actionId) {
+                EditorInfo.IME_ACTION_SEND -> {
+                    sendMessage()
+                    true
+                }
+                else -> false
+            }
 
-        fun inputText(){
-            enteredText.add(textInput.text.toString())
-            Toast.makeText(this, "Added$enteredText", Toast.LENGTH_SHORT).show()
         }
-        inputText()
 
+    }
+
+    private fun sendMessage() {
+        Toast.makeText(this, "Button is Pratsye",Toast.LENGTH_LONG).show()
     }
 }
 
