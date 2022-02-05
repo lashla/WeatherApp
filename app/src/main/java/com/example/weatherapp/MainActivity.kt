@@ -41,9 +41,7 @@ class MainActivity : AppCompatActivity() {
         val service = retrofit.create(WeatherApi::class.java)
 
         val call = service.getCurrentWeatherData(query, "2486c00d678c12f26979dcefa4344b2f")
-        val stringBuilder = Html.fromHtml(
-            "<b>País:</b> " + WeatherResponse.sys!!.country + "<br>" +
-                    "<b>Temperatura:</b> " +(WeatherResponse.main!!.temp - 273 ) + " ºC"
+
     }
 }
 
