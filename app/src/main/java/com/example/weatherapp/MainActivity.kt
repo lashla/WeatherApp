@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         val service = retrofit.create(WeatherApi::class.java)
 
-        val call = service.getCurrentWeatherData(query, "2486c00d678c12f26979dcefa4344b2f")
+        val call = service.getCityTemp(query, "2486c00d678c12f26979dcefa4344b2f")
 
     }
 }
