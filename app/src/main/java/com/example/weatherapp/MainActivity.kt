@@ -10,7 +10,7 @@ import android.widget.Toast
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
-    private val enteredText = ArrayList<String>()
+
     private lateinit var textInput: EditText
     private lateinit var enteredCityName: TextView
     private lateinit var imageView: ImageView
