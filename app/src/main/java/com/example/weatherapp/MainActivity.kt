@@ -36,9 +36,10 @@ class MainActivity : AppCompatActivity() {
             val call = service.getCityTemp(query, "2486c00d678c12f26979dcefa4344b2f")
             call.enqueue(object : Callback<WeatherResponse> {
                 override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>){
-                    if (response.code() == 300) {
+                    if (response.code() == 200) {
                         cityArrayList.add(response.body()!!.name!!)
-                        currentTemperature = response.body()!!.temperature
+                        enteredCityName.text = response.body()!!.name!!
+                        tvTemperature.text = response.body()!!.temperature.toString()
                         icon = response.body()!!.weather_icons
                     }
                 }
@@ -58,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             }
             return@setOnEditorActionListener false
         }
+
 
 
 
