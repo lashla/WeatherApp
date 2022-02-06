@@ -7,4 +7,6 @@ class WeatherResponse {
     var temperature: Int = 0
     @SerializedName("name")
     var name: String? = null
+    @SerializedName("weather_icons")
+    var weather_icons = ArrayList<String>()
 }
