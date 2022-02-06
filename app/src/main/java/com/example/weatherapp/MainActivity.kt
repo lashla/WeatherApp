@@ -36,10 +36,10 @@ class MainActivity : AppCompatActivity() {
             call.enqueue(object : Callback<WeatherResponse> {
                 override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>){
                     if (response.code() == 200) {
-                        enteredCityName.text = response.body()!!.name
-                        tvTemperature.text = response.body()!!.temperature.toString()
+                        enteredCityName.text = response.body()!!.location?.name ?: "No city found"
+                        tvTemperature.text = response.body()!!.current?.temperature.toString()
                         Picasso.with(this@MainActivity)
-                            .load(response.body()!!.weather_icons?.get(0))
+                            .load(response.body()!!.current?.weather_icons?.get(0))
                             .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
                             .into(imageView);
                     }
