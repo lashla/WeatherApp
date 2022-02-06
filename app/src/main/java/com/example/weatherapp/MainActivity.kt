@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 
-import com.example.weatherapp.api.ViewModel
 import com.example.weatherapp.api.WeatherApi
 import com.example.weatherapp.api.WeatherResponse
 import com.squareup.picasso.Picasso
@@ -20,11 +19,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
-    var icon: List<String>? = listOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        fun someRetrofit(query: String,){
+        fun someRetrofit(query: String){
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://api.weatherstack.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -41,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                         Picasso.with(this@MainActivity)
                             .load(response.body()!!.current?.weather_icons?.get(0))
                             .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
-                            .into(imageView);
+                            .into(imageView)
                     }
                 }
 
