@@ -8,9 +8,9 @@ class WeatherResponse {
 }
 
 class Current{
-    val temperature: Int? = 0
+    val temperature: Int = 0
     @SerializedName("weather_icons")
-    var weatherIcons: List<String>? = listOf<String>()
+    var weatherIcons: List<String> = listOf<String>()
 }
 
 class Location{
