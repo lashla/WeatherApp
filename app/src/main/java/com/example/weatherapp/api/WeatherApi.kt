@@ -5,10 +5,13 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface WeatherApi {
+
+    //У тебя тут были неправильные названия get параметров
+
     @GET("/current")
     fun getCityTemp(
-        @Query("name") name: String,
-        @Query("accessKey") access_key: String
+        @Query("query") name: String,
+        @Query("access_key") access_key: String
     ): Call<WeatherResponse>
 
 }
