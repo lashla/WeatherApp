@@ -10,6 +10,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.example.weatherapp.api.WeatherApi
 import com.example.weatherapp.api.WeatherResponse
 import retrofit2.Call
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity() {
                     if (response.code() == 200) {
                         cityArrayList.add(response.body()!!.name!!)
                         currentWeather = response.body()!!.temperature
+                        Toast.makeText(applicationContext,"$cityArrayList, $currentWeather",Toast.LENGTH_LONG).show()
                     }
             }
 
