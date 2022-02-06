@@ -20,7 +20,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     //опчитай про lazy инициализаторы
 
@@ -45,8 +45,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         //Не нагромождай onCreate выноси все в отдельные функции
-
-        setContentView(R.layout.activity_main)
         initView()
     }
 
