@@ -22,6 +22,7 @@ import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
     private val cityArrayList = ArrayList<String>()
+    private var currentWeather: Int = 0
     private lateinit var textInput: EditText
     private lateinit var enteredCityName: TextView
     private lateinit var imageView: ImageView
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>){
                     if (response.code() == 200) {
                         cityArrayList.add(response.body()!!.name!!)
+                        currentWeather = response.body()!!.temperature
                     }
             }
 
