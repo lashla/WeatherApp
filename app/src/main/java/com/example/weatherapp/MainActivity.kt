@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
-
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
 import com.example.weatherapp.api.WeatherApi
 import com.example.weatherapp.api.WeatherResponse
 import com.squareup.picasso.Picasso
@@ -19,6 +21,11 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+enum class Status{
+    SUCCESS,
+    ERROR,
+    LOADING
+}
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
@@ -43,7 +50,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         //Не нагромождай onCreate выноси все в отдельные функции
         initView()
     }
@@ -53,6 +59,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             if (((event?.action ?: -1) == KeyEvent.ACTION_DOWN)
                 || keyCode == EditorInfo.IME_ACTION_DONE
             ) {
+                progressBar.visibility = ProgressBar.VISIBLE
                 makeRequest(textInput.text.toString())
                 return@setOnEditorActionListener true
             }
@@ -72,12 +79,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     //почитай про let apply with штуки
 
                     response.body()?.let {
+                        progressBar.visibility = ProgressBar.INVISIBLE
                         enteredCityName.text = it.location?.name ?: "No city found"
+                        enteredCityName.visibility = TextView.VISIBLE
                         tvTemperature.text = it.current?.temperature.toString()
+                        tvTemperature.visibility = TextView.VISIBLE
                         Picasso.with(this@MainActivity)
                             .load(it.current?.weatherIcons?.get(0))
                             .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
                             .into(imageView)
+                        imageView.visibility = ImageView.VISIBLE
+
                     }
 
                 }
