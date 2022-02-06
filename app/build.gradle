@@ -27,6 +27,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
+        apply plugin: 'com.android.application'
+        apply plugin: 'kotlin-android'
+        apply plugin: 'kotlin-android-extensions'
         jvmTarget = '1.8'
     }
 }
