@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
+import android.view.KeyEvent
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
@@ -32,37 +34,59 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        fun someRetrofit(query: String){
+            val retrofit = Retrofit.Builder()
+                .baseUrl("http://api.weatherstack.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            val service = retrofit.create(WeatherApi::class.java)
+
+            val call = service.getCityTemp(query, "2486c00d678c12f26979dcefa4344b2f")
+            call.enqueue(object : Callback<WeatherResponse>{
+                override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>){
+                    if (response.code() == 300) {
+                        cityArrayList.add(response.body()!!.name!!)
+                        currentWeather = response.body()!!.temperature
+                        Toast.makeText(applicationContext,"$cityArrayList, $currentWeather",Toast.LENGTH_LONG).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
+                    Log.e(TAG, "${t.message} " )
+                }
+            })
+        }
         findViewById<EditText?>(R.id.textInput).setOnEditorActionListener { v, actionId, event ->
             return@setOnEditorActionListener when (actionId) {
                 EditorInfo.IME_ACTION_SEND -> {
-                    query = v.toString()
+
                     true
                 }
                 else -> false
             }
 
         }
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://api.weatherstack.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        textInput = findViewById(R.id.textInput)
+        textInput.setOnKeyListener(object : View.OnKeyListener{
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if (event != null) {
+                    if (event.action == KeyEvent.ACTION_DOWN &&
+                        keyCode == KeyEvent.KEYCODE_ENTER) {
+                        Toast.makeText(applicationContext, "pressed some key$textInput", Toast.LENGTH_LONG).show()
 
-        val service = retrofit.create(WeatherApi::class.java)
+                        textInput.clearFocus()
+                        textInput.isCursorVisible = false
 
-        val call = service.getCityTemp(query, "2486c00d678c12f26979dcefa4344b2f")
-            call.enqueue(object : Callback<WeatherResponse>{
-                override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>){
-                    if (response.code() == 200) {
-                        cityArrayList.add(response.body()!!.name!!)
-                        currentWeather = response.body()!!.temperature
-                        Toast.makeText(applicationContext,"$cityArrayList, $currentWeather",Toast.LENGTH_LONG).show()
+                        return true
                     }
-            }
-
-                override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
-                    Log.e(TAG, "onFailure: enqueing data", )
                 }
-            })
+                return false
+            }
+        })
+
+
+
 }
 }
 
