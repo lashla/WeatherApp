@@ -51,9 +51,7 @@ class MainActivity : AppCompatActivity() {
         textInput.setOnEditorActionListener { _, keyCode, event ->
             if (((event?.action ?: -1) == KeyEvent.ACTION_DOWN)
                 || keyCode == EditorInfo.IME_ACTION_DONE) {
-
                 someRetrofit(textInput.text.toString())
-
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
