@@ -19,15 +19,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
-    var cityArrayList = ArrayList<String>()
-    var currentTemperature: Int = 0
     var icon = ArrayList<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         fun someRetrofit(query: String,){
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://api.weatherstack.com/")
+                .baseUrl("https://api.weatherstack.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
@@ -37,8 +35,7 @@ class MainActivity : AppCompatActivity() {
             call.enqueue(object : Callback<WeatherResponse> {
                 override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>){
                     if (response.code() == 200) {
-                        cityArrayList.add(response.body()!!.name!!)
-                        enteredCityName.text = response.body()!!.name!!
+                        enteredCityName.text = response.body()!!.name
                         tvTemperature.text = response.body()!!.temperature.toString()
                         icon = response.body()!!.weather_icons
                     }
