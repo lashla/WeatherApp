@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                         enteredCityName.text = it.location?.name ?: "No city found"
                         tvTemperature.text = it.current?.temperature.toString()
                         Picasso.with(this@MainActivity)
-                            .load(it.current?.weather_icons?.get(0))
+                            .load(it.current?.weatherIcons?.get(0))
                             .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
                             .into(imageView)
                     }
