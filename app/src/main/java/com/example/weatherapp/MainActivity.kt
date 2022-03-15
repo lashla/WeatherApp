@@ -29,12 +29,10 @@ enum class Status{
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    //опчитай про lazy инициализаторы
-
     private val retrofit by lazy {
         Retrofit.Builder()
 
-            .baseUrl("http://api.weatherstack.com/") //Ты неправильно указал url(https недоступен). Когда используешь  http а не https то не забывай в манифесте указывать         android:usesCleartextTraffic="true"
+            .baseUrl("http://api.weatherstack.com/") // android:usesCleartextTraffic="true" to make https
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
@@ -50,7 +48,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //Не нагромождай onCreate выноси все в отдельные функции
         initView()
     }
 
@@ -74,9 +71,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 call: Call<WeatherResponse>,
                 response: Response<WeatherResponse>
             ) {
-                //не проверяй на 200 код. так как успешный ответ это коды с 200 по 299
+               
                 if (response.isSuccessful) {
-                    //почитай про let apply with штуки
+                   
 
                     response.body()?.let {
                         progressBar.visibility = ProgressBar.INVISIBLE
