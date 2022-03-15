@@ -1,6 +1,7 @@
 package com.example.weatherapp
 
 import android.content.ContentValues
+import android.os.Build
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,10 @@ import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.example.weatherapp.ViewModelComponents.WeatherViewModel
 import com.example.weatherapp.api.WeatherApi
 import com.example.weatherapp.api.WeatherResponse
 import com.squareup.picasso.Picasso
@@ -29,77 +34,46 @@ enum class Status{
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    //опчитай про lazy инициализаторы
+    private lateinit var viewModel: WeatherViewModel
 
-    private val retrofit by lazy {
-        Retrofit.Builder()
 
-            .baseUrl("http://api.weatherstack.com/") //Ты неправильно указал url(https недоступен). Когда используешь  http а не https то не забывай в манифесте указывать         android:usesCleartextTraffic="true"
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .build()
-    }
-
-    private val okHttpClient by lazy {
-        OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor()).build()
-    }
-
-    private val service by lazy {
-        retrofit.create(WeatherApi::class.java)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //Не нагромождай onCreate выноси все в отдельные функции
+        viewModel = ViewModelProvider(this)[WeatherViewModel::class.java]
         initView()
     }
 
+    @RequiresApi(Build.VERSION_CODES.CUPCAKE)
     private fun initView() {
         textInput.setOnEditorActionListener { _, keyCode, event ->
             if (((event?.action ?: -1) == KeyEvent.ACTION_DOWN)
                 || keyCode == EditorInfo.IME_ACTION_DONE
             ) {
                 progressBar.visibility = ProgressBar.VISIBLE
-                makeRequest(textInput.text.toString())
+                weatherDisplay(textInput.text.toString())
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
         }
     }
 
-    private fun makeRequest(query: String) {
-        val call = service.getCityTemp(query, "2486c00d678c12f26979dcefa4344b2f")
-        call.enqueue(object : Callback<WeatherResponse> {
-            override fun onResponse(
-                call: Call<WeatherResponse>,
-                response: Response<WeatherResponse>
-            ) {
-                //не проверяй на 200 код. так как успешный ответ это коды с 200 по 299
-                if (response.isSuccessful) {
-                    //почитай про let apply with штуки
-
-                    response.body()?.let {
-                        progressBar.visibility = ProgressBar.INVISIBLE
-                        enteredCityName.text = it.location?.name ?: "No city found"
-                        enteredCityName.visibility = TextView.VISIBLE
-                        tvTemperature.text = it.current?.temperature.toString()
-                        tvTemperature.visibility = TextView.VISIBLE
-                        Picasso.with(this@MainActivity)
-                            .load(it.current?.weatherIcons?.get(0))
+    private fun weatherDisplay(cityInput: String) {
+        viewModel.requestHandler(cityInput)
+             viewModel.weatherData.observe(this){
+                 enteredCityName.text = it[0]
+                 tvTemperature.text = it[1]
+                 Picasso.with(this@MainActivity)
+                            .load(it[2])
                             .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
                             .into(imageView)
-                        imageView.visibility = ImageView.VISIBLE
+                 progressBar.visibility = ProgressBar.INVISIBLE
+                 enteredCityName.visibility = TextView.VISIBLE
+                 tvTemperature.visibility = TextView.VISIBLE
+                 imageView.visibility = ImageView.VISIBLE
+             }
+        }
 
-                    }
-
-                }
-            }
-
-            override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
-                Log.e(ContentValues.TAG, "${t.message} ")
-            }
-        })
-    }
 
 }
 
