@@ -1,11 +1,9 @@
 package com.example.weatherapp
 
-import android.content.ContentValues
 import android.os.Build
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
@@ -13,27 +11,12 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.ViewModelComponents.MainRepository
 import com.example.weatherapp.ViewModelComponents.MyViewModelFactory
 import com.example.weatherapp.ViewModelComponents.WeatherViewModel
 import com.example.weatherapp.api.WeatherApi
-import com.example.weatherapp.api.WeatherResponse
 import com.squareup.picasso.Picasso
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-
-enum class Status{
-    SUCCESS,
-    ERROR,
-    LOADING
-}
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
