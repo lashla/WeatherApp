@@ -11,9 +11,12 @@ import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.weatherapp.ViewModelComponents.MainRepository
+import com.example.weatherapp.ViewModelComponents.MyViewModelFactory
 import com.example.weatherapp.ViewModelComponents.WeatherViewModel
 import com.example.weatherapp.api.WeatherApi
 import com.example.weatherapp.api.WeatherResponse
@@ -40,7 +43,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[WeatherViewModel::class.java]
+        val retrofitSerevice = WeatherApi.getInstance()
+        val mainRepository = MainRepository(retrofitSerevice)
+        viewModel = ViewModelProvider(this, MyViewModelFactory(mainRepository))[WeatherViewModel::class.java]
         initView()
     }
 
@@ -60,21 +65,23 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun weatherDisplay(cityInput: String) {
         viewModel.requestHandler(cityInput)
-             viewModel.weatherData.observe(this){
-                 enteredCityName.text = it[0]
-                 tvTemperature.text = it[1]
-                 Picasso.with(this@MainActivity)
-                            .load(it[2])
-                            .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
-                            .into(imageView)
-                 progressBar.visibility = ProgressBar.INVISIBLE
-                 enteredCityName.visibility = TextView.VISIBLE
-                 tvTemperature.visibility = TextView.VISIBLE
-                 imageView.visibility = ImageView.VISIBLE
-             }
+        if (viewModel.isOperationCompleted) {
+            viewModel.weatherData.observe(this) {
+                enteredCityName.text = it[0]
+                tvTemperature.text = it[1]
+                Picasso.with(this@MainActivity)
+                    .load(it[2])
+                    .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
+                    .into(imageView)
+                progressBar.visibility = ProgressBar.INVISIBLE
+                enteredCityName.visibility = TextView.VISIBLE
+                tvTemperature.visibility = TextView.VISIBLE
+                imageView.visibility = ImageView.VISIBLE
+            }
+        } else {
+            Toast.makeText(this, "Something went wrong, try using another input", Toast.LENGTH_LONG).show()
         }
-
-
+        }
 }
 
 
