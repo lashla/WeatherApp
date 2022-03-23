@@ -1,4 +1,4 @@
-package com.example.weatherapp
+package com.example.weatherapp.ui
 
 import android.os.Build
 import kotlinx.android.synthetic.main.activity_main.*
@@ -12,10 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
-import com.example.weatherapp.ViewModelComponents.MainRepository
-import com.example.weatherapp.ViewModelComponents.WeatherViewModel
-import com.example.weatherapp.api.WeatherApi
-import com.example.weatherapp.di.NetworkModule
+import com.example.weatherapp.R
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +25,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val retrofitService = NetworkModule.provideRetrofitService(NetworkModule.provideRetrofit())
         viewModel = ViewModelProvider(this)[WeatherViewModel::class.java]
         initView()
     }

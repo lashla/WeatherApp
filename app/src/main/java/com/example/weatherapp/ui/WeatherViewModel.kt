@@ -1,8 +1,9 @@
-package com.example.weatherapp.ViewModelComponents
+package com.example.weatherapp.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.weatherapp.di.NetworkModule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.*
@@ -28,7 +29,7 @@ class WeatherViewModel @Inject constructor(private val mainRepository: MainRepos
     @ViewModelScoped
     private suspend fun makeRequest(query: String) {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val response = mainRepository.getTempInfo(query)
+            val response = mainRepository.getTempInfo(query, NetworkModule.provideRetrofitService(NetworkModule.provideRetrofit()))
             withContext(Dispatchers.Main){
                 if (response.isSuccessful) {
                     response.body()?.let {

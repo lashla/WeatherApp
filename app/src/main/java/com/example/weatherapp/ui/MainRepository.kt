@@ -1,9 +1,8 @@
-package com.example.weatherapp.ViewModelComponents
+package com.example.weatherapp.ui
 
 import com.example.weatherapp.api.WeatherApi
 import com.example.weatherapp.api.WeatherResponse
 import retrofit2.Response
-import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
