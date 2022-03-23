@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val retrofitService = NetworkModule.provideRetrofitService(NetworkModule.provideRetrofit())
-        val mainRepository = MainRepository(retrofitService)
         viewModel = ViewModelProvider(this)[WeatherViewModel::class.java]
         initView()
     }
