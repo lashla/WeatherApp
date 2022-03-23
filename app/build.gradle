@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -8,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.weatherapp"
-        minSdk 23
+        minSdk 30
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -36,6 +39,8 @@ android {
 }
 
 dependencies {
+    implementation "com.google.dagger:hilt-android:2.41"
+    kapt 'com.google.dagger:hilt-compiler:2.41'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     def lifecycle_version = "2.4.1"

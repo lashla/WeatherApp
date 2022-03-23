@@ -4,9 +4,12 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
-open class WeatherViewModel(private val mainRepository: MainRepository): ViewModel() {
+@HiltViewModel
+class WeatherViewModel @Inject constructor(private val mainRepository: MainRepository): ViewModel() {
     var weatherData = MutableLiveData<ArrayList<String>>()
     private val errorMessage = MutableLiveData<String>()
     var isOperationCompleted: Boolean = true

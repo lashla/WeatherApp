@@ -17,17 +17,20 @@ import com.example.weatherapp.ViewModelComponents.MyViewModelFactory
 import com.example.weatherapp.ViewModelComponents.WeatherViewModel
 import com.example.weatherapp.api.WeatherApi
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private lateinit var viewModel: WeatherViewModel
+    @Inject lateinit var viewModel: WeatherViewModel
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val retrofitSerevice = WeatherApi.getInstance()
-        val mainRepository = MainRepository(retrofitSerevice)
+        val retrofitService = WeatherApi.getInstance()
+        val mainRepository = MainRepository(retrofitService)
         viewModel = ViewModelProvider(this, MyViewModelFactory(mainRepository))[WeatherViewModel::class.java]
         initView()
     }
