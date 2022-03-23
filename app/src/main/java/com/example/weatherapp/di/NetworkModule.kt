@@ -15,7 +15,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private var retrofitService: WeatherApi? = null
+
     @Singleton
     @Provides
     fun provideRetrofit(): Retrofit {

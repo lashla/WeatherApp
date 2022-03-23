@@ -1,20 +1,25 @@
 package com.example.weatherapp.ViewModelComponents
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.Provides
+import dagger.assisted.Assisted
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @HiltViewModel
 class WeatherViewModel @Inject constructor(private val mainRepository: MainRepository): ViewModel() {
+
     var weatherData = MutableLiveData<ArrayList<String>>()
     private val errorMessage = MutableLiveData<String>()
     var isOperationCompleted: Boolean = true
     private var job: Job? = null
 
+    @ViewModelScoped
     fun requestHandler(inputText: String) {
         viewModelScope.launch {
             makeRequest(inputText)
@@ -23,6 +28,7 @@ class WeatherViewModel @Inject constructor(private val mainRepository: MainRepos
 
     private val onlinePosts = ArrayList<String>()
 
+    @ViewModelScoped
     private suspend fun makeRequest(query: String) {
         job = CoroutineScope(Dispatchers.IO).launch {
             val response = mainRepository.getTempInfo(query)
