@@ -1,7 +1,6 @@
 package com.example.weatherapp.di
 
 import com.example.weatherapp.ui.MainRepository
-import com.example.weatherapp.api.WeatherApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
