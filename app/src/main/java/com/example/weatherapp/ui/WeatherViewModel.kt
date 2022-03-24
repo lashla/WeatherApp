@@ -10,7 +10,7 @@ import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @HiltViewModel
-class WeatherViewModel @Inject constructor(private val mainRepository: MainRepository): ViewModel() {
+class WeatherViewModel @Inject constructor(private val repositoryInterface: RepositoryInterface): ViewModel() {
 
     var weatherData = MutableLiveData<ArrayList<String>>()
     private val errorMessage = MutableLiveData<String>()
@@ -29,7 +29,7 @@ class WeatherViewModel @Inject constructor(private val mainRepository: MainRepos
     @ViewModelScoped
     private suspend fun makeRequest(query: String) {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val response = mainRepository.getTempInfo(query, NetworkModule.provideRetrofitService(NetworkModule.provideRetrofit()))
+            val response = repositoryInterface.getTempInfo(query, NetworkModule.provideRetrofitService(NetworkModule.provideRetrofit()))
             withContext(Dispatchers.Main){
                 if (response.isSuccessful) {
                     response.body()?.let {

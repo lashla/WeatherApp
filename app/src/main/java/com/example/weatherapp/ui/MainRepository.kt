@@ -2,6 +2,7 @@ package com.example.weatherapp.ui
 
 import com.example.weatherapp.api.WeatherApi
 import com.example.weatherapp.api.WeatherResponse
+import dagger.Provides
 import retrofit2.Response
 import javax.inject.Singleton
 
