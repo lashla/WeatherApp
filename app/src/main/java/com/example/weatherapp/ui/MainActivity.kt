@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             enteredCityName.visibility = TextView.VISIBLE
             tvTemperature.visibility = TextView.VISIBLE
             imageView.visibility = ImageView.VISIBLE
+            it.clear()
         }
     }
 }
