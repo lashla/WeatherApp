@@ -7,98 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-        <EditText
-            android:id="@+id/textInput"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/weatherFragmentContainer"
+            android:name="com.example.weatherapp.ui.WeatherDisplayFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:autofillHints="@string/search"
-            android:hint="@string/search"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            android:textColorHint="#78909C"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:layout_height="match_parent"
+            android:tag="weatherFCV"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/weather_display_fragment" />
 
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="Widget.ProgressBar.Large.Inverse"
-            android:indeterminate="true"
-            android:layout_width="0dp"
-            android:visibility="invisible"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:progress="0"
-            app:layout_constraintBottom_toTopOf="@+id/enteredCityName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInput" />
-
-        <TextView
-            android:id="@+id/enteredCityName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            android:text="@string/city_name"
-            android:textSize="24sp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInput" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:visibility="invisible"
-            android:contentDescription="@string/weatherimage"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/enteredCityName"
-            app:srcCompat="@drawable/ic_launcher_background"
-            tools:ignore="ImageContrastCheck" />
-
-        <TextView
-            android:id="@+id/tvTemperature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:visibility="invisible"
-            android:text="@string/temperature"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-        <TextView
-            android:id="@+id/searchHistory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="180dp"
-            android:text="@string/search_history"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.061"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTemperature" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvSearchHistory"
-            android:layout_width="409dp"
-            android:layout_height="243dp"
-            android:layout_margin="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchHistory" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
