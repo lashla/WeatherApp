@@ -17,15 +17,10 @@ import androidx.annotation.RequiresApi
 import com.example.weatherapp.R
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.scopes.FragmentScoped
 import kotlinx.android.synthetic.main.weather_display_fragment.*
 
 @AndroidEntryPoint
 class WeatherDisplayFragment : Fragment() {
-
-//    companion object {
-//        fun newInstance() = WeatherDisplayFragment()
-//    }
 
     private lateinit var viewModel: WeatherViewModel
 
