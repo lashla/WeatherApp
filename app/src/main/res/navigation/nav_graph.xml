@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/weatherDisplayFragment"
         android:name="com.example.weatherapp.ui.WeatherDisplayFragment"
-        android:label="weather_display_fragment"
+        android:label="WeatherSearch"
         tools:layout="@layout/weather_display_fragment" >
         <action
             android:id="@+id/action_weatherDisplayFragment_to_mainFragment"
@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.weatherapp.ui.MainFragment"
-        android:label="fragment_main"
+        android:label="Main"
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_weatherDisplayFragment"
