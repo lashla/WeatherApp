@@ -23,9 +23,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.weatherFragmentContainer, WeatherDisplayFragment())
-            .commit()
     }
 
 //    @RequiresApi(Build.VERSION_CODES.CUPCAKE)
