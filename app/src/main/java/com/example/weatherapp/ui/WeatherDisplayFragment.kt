@@ -60,17 +60,19 @@ class WeatherDisplayFragment : Fragment() {
     private fun initViewModel() {
         viewModel = ViewModelProvider(this)[WeatherViewModel::class.java]
         viewModel.weatherData.observe(viewLifecycleOwner) {
-            enteredCityName.text = it[0]
-            tvTemperature.text = it[1]
-            Picasso.with(context)
-                .load(it[2])
-                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
-                .into(imageView)
-            progressBar.visibility = ProgressBar.INVISIBLE
-            enteredCityName.visibility = TextView.VISIBLE
-            tvTemperature.visibility = TextView.VISIBLE
-            imageView.visibility = ImageView.VISIBLE
-            it.clear()
+            if (it.isNotEmpty()) {
+                enteredCityName.text = it[0]
+                tvTemperature.text = it[1]
+                Picasso.with(context)
+                    .load(it[2])
+                    .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
+                    .into(imageView)
+                progressBar.visibility = ProgressBar.INVISIBLE
+                enteredCityName.visibility = TextView.VISIBLE
+                tvTemperature.visibility = TextView.VISIBLE
+                imageView.visibility = ImageView.VISIBLE
+                it.clear()
+            }
         }
     }
 }
