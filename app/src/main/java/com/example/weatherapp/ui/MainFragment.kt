@@ -26,7 +26,7 @@ class MainFragment : Fragment() {
     }
 
     private fun setupNavigationButton() {
-        goToSearchBtn.setOnClickListener{
+        goToWeatherSearch.setOnClickListener{
             Navigation.findNavController(requireView()).navigate(R.id.action_mainFragment_to_weatherDisplayFragment)
         }
     }

@@ -17,24 +17,19 @@ import androidx.annotation.RequiresApi
 import com.example.weatherapp.R
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.weather_display_fragment.*
 
 @AndroidEntryPoint
-class WeatherDisplayFragment : Fragment() {
+class WeatherDisplayFragment : Fragment(R.layout.weather_display_fragment) {
 
     private lateinit var viewModel: WeatherViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.weather_display_fragment, container, false)
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initView()
         initViewModel()
+        setupSearchButtons()
     }
 
     @RequiresApi(Build.VERSION_CODES.CUPCAKE)
@@ -44,6 +39,9 @@ class WeatherDisplayFragment : Fragment() {
                 || keyCode == EditorInfo.IME_ACTION_DONE
             ) {
                 progressBar.visibility = ProgressBar.VISIBLE
+                searchView.visibility = View.INVISIBLE
+                textInput.visibility = View.INVISIBLE
+                cancelSearchBtn.visibility = View.INVISIBLE
                 weatherDisplay(textInput.text.toString())
                 return@setOnEditorActionListener true
             }
@@ -58,21 +56,46 @@ class WeatherDisplayFragment : Fragment() {
         }
     }
     private fun initViewModel() {
+        var lastWeatherResponse: ArrayList<String> = arrayListOf()
         viewModel = ViewModelProvider(this)[WeatherViewModel::class.java]
         viewModel.weatherData.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
-                enteredCityName.text = it[0]
-                tvTemperature.text = it[1]
-                Picasso.with(context)
-                    .load(it[2])
-                    .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
-                    .into(imageView)
-                progressBar.visibility = ProgressBar.INVISIBLE
-                enteredCityName.visibility = TextView.VISIBLE
-                tvTemperature.visibility = TextView.VISIBLE
-                imageView.visibility = ImageView.VISIBLE
+                initWeatherInfoView(it)
+                lastWeatherResponse = it
                 it.clear()
+            } else if (lastWeatherResponse.isNotEmpty()) {
+                initWeatherInfoView(lastWeatherResponse)
             }
+        }
+    }
+
+    private fun initWeatherInfoView(Response: ArrayList<String>) {
+        enteredCityName.text = Response[0]
+        tvTemperature.text = Response[1]
+        Picasso.with(context)
+            .load(Response[2])
+            .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
+            .into(imageView)
+        tvHumidityValue.text = Response[3]
+        tvAirPressureValue.text = Response[4]
+        tvWindStatusValue.text = Response[5]
+        tvVisibilityValue.text = Response[6]
+        weatherDiscription.text = Response[7]
+        progressBar.visibility = ProgressBar.INVISIBLE
+        enteredCityName.visibility = TextView.VISIBLE
+        tvTemperature.visibility = TextView.VISIBLE
+        imageView.visibility = ImageView.VISIBLE
+    }
+    private fun setupSearchButtons() {
+        searchBtn.setOnClickListener {
+            searchView.visibility = View.VISIBLE
+            textInput.visibility = View.VISIBLE
+            cancelSearchBtn.visibility = View.VISIBLE
+        }
+        cancelSearchBtn.setOnClickListener{
+            searchView.visibility = View.INVISIBLE
+            textInput.visibility = View.INVISIBLE
+            cancelSearchBtn.visibility = View.INVISIBLE
         }
     }
 }

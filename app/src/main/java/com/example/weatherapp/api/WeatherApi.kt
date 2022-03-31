@@ -15,6 +15,8 @@ interface WeatherApi {
     suspend fun getCityTemp(
         @Query("query") name: String,
         @Query("access_key") access_key: String
+//        @Query("forecast_days") forecast_days: Int,
+//        @Query("hourly") hourly: Int
     ): Response<WeatherResponse>
 
 }

@@ -37,10 +37,19 @@ class WeatherViewModel @Inject constructor(private val repositoryInterface: Repo
                         val cityName = it.location?.name ?: "No city found"
                         val currentTemperature = it.current?.temperature.toString()
                         val temperatureImage = it.current?.weatherIcons?.get(0)
-
+                        val humidity = it.current?.humidity.toString() + "%"
+                        val airPressure = it.current?.pressure.toString() + "mph"
+                        val windSpeed = it.current?.windSpeed.toString() + "m/s"
+                        val currentVisibility = it.current?.visibility.toString() + "%"
+                        val weatherDescription = it.current?.weatherDescriptions?.get(0)
                         onlinePosts.add(cityName)
                         onlinePosts.add(currentTemperature)
                         onlinePosts.add(temperatureImage!!)
+                        onlinePosts.add(humidity)
+                        onlinePosts.add(airPressure)
+                        onlinePosts.add(windSpeed)
+                        onlinePosts.add(currentVisibility)
+                        onlinePosts.add(weatherDescription!!)
                         weatherData.value = onlinePosts
                     }
                 } else {
