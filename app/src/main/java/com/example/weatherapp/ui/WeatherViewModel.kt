@@ -16,6 +16,9 @@ class WeatherViewModel @Inject constructor(private val repositoryInterface: Repo
     private val errorMessage = MutableLiveData<String>()
     var isOperationCompleted: Boolean = true
     private var job: Job? = null
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
+        throwable.printStackTrace()
+    }
 
     @ViewModelScoped
     fun requestHandler(inputText: String) {
@@ -30,7 +33,7 @@ class WeatherViewModel @Inject constructor(private val repositoryInterface: Repo
     private suspend fun makeRequest(cityName: String) {
         job = CoroutineScope(Dispatchers.IO).launch {
             val response = repositoryInterface.getTempInfo(cityName, NetworkModule.provideRetrofitService(NetworkModule.provideRetrofit()))
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main + coroutineExceptionHandler){
                 if (response.isSuccessful) {
                     response.body()?.let {
 

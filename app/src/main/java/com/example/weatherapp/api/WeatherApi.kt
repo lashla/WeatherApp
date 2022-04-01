@@ -19,4 +19,3 @@ interface OpenWeatherApi {
     ): Response<WeatherResponse>
 
 }
-
