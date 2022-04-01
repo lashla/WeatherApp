@@ -1,25 +1,15 @@
 package com.example.weatherapp.api
 
+import com.example.weatherapp.model.City
+import com.example.weatherapp.model.List
+import com.example.weatherapp.model.Temp
+import com.example.weatherapp.model.Weather
 import com.google.gson.annotations.SerializedName
 
-class WeatherResponse {
-    val location: Location? = null
-    val current: Current? = null
-}
+class WeatherResponse(
+    @SerializedName("city") var city : City,
+    @SerializedName("temp") var temp: Temp?,
+    @SerializedName("list") var list : List,
+    @SerializedName("weather")var weather: Weather
+)
 
-class Current{
-    val temperature: Int = 0
-    @SerializedName("weather_icons")
-    var weatherIcons: List<String> = listOf<String>()
-    val visibility: Int = 0
-    @SerializedName("wind-speed")
-    val windSpeed: Int = 0
-    val pressure: Int = 0
-    val humidity: Int = 0
-    @SerializedName("weather_descriptions")
-    val weatherDescriptions: List<String> = listOf<String>()
-}
-
-class Location{
-    val name: String? = null
-}

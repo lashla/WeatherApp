@@ -9,14 +9,13 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 
-interface WeatherApi {
+interface OpenWeatherApi {
 
-    @GET("/current")
+    @GET("/forecast/daily")
     suspend fun getCityTemp(
-        @Query("query") name: String,
-        @Query("access_key") access_key: String
-//        @Query("forecast_days") forecast_days: Int,
-//        @Query("hourly") hourly: Int
+        @Query("q") cityName: String,
+        @Query("cnt") count: Int,
+        @Query("appid") appId: String
     ): Response<WeatherResponse>
 
 }

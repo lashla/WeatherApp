@@ -1,6 +1,6 @@
 package com.example.weatherapp.di
 
-import com.example.weatherapp.api.WeatherApi
+import com.example.weatherapp.api.OpenWeatherApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,7 +23,7 @@ object NetworkModule {
             OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor()).build()
         }
         return Retrofit.Builder()
-            .baseUrl("http://api.weatherstack.com/") //         android:usesCleartextTraffic="true"
+            .baseUrl("http://api.openweathermap.org/data/2.5/") //         android:usesCleartextTraffic="true"
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
@@ -31,7 +31,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofitService(retrofit: Retrofit): WeatherApi {
-        return retrofit.create(WeatherApi::class.java)
+    fun provideRetrofitService(retrofit: Retrofit): OpenWeatherApi {
+        return retrofit.create(OpenWeatherApi::class.java)
     }
 }
