@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.*
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 @HiltViewModel
 class WeatherViewModel @Inject constructor(private val repositoryInterface: RepositoryInterface): ViewModel() {
@@ -39,7 +40,7 @@ class WeatherViewModel @Inject constructor(private val repositoryInterface: Repo
                 if (response.isSuccessful) {
                     response.body()?.let {
                         val requestCityName = it.city.name ?: "No city found"
-                        val currentTemperature = it.list[0].main?.temp.toString() + "°C"
+                        val currentTemperature = it.list[0].main?.temp?.roundToInt().toString() + "°C"
                         val temperatureImage = "https://openweathermap.org/img/w/" + it.list[0].weather?.get(0)?.icon.toString() + ".png"
                         val humidity = it.list[0].main?.humidity.toString() + "%"
                         val airPressure = it.list[0].main?.pressure.toString() + "mph"

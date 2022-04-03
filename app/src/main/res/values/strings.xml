@@ -18,11 +18,12 @@
     <string name="the_next_5_days">The next 5 days</string>
     <string name="_0_c">0*C</string>
     <string name="dayofweek">dayOfWeek</string>
-    <string name="wind_status">Wind Status</string>
+    <string name="wind_status">Wind Speed</string>
     <string name="_5mps">5mps</string>
     <string name="air_pressure">Air pressure</string>
     <string name="_0">0%</string>
     <string name="humidity">Humidity</string>
     <string name="cloudly">Cloudly</string>
     <string name="visibility">Visibility</string>
+    <string name="next_15_hours">Next 15 hours</string>
 </resources>
