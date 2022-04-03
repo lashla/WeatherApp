@@ -23,7 +23,7 @@ object NetworkModule {
             OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor()).build()
         }
         return Retrofit.Builder()
-            .baseUrl("http://api.openweathermap.org/data/2.5/") //         android:usesCleartextTraffic="true"
+            .baseUrl("http://api.openweathermap.org/") //         android:usesCleartextTraffic="true"
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
