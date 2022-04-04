@@ -1,7 +1,6 @@
 package com.example.weatherapp.ui
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,6 +8,7 @@ import com.example.weatherapp.di.NetworkModule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.*
+import java.time.LocalDateTime
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
@@ -16,12 +16,10 @@ import kotlin.math.roundToInt
 class WeatherViewModel @Inject constructor(private val repositoryInterface: RepositoryInterface): ViewModel() {
 
     var weatherData = MutableLiveData<ArrayList<String>>()
+    var forecastData = MutableLiveData<ArrayList<String>>()
     private val errorMessage = MutableLiveData<String>()
     var isOperationCompleted: Boolean = true
     private var job: Job? = null
-    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
-        throwable.printStackTrace()
-    }
 
     @ViewModelScoped
     fun requestHandler(inputText: String) {
@@ -31,7 +29,7 @@ class WeatherViewModel @Inject constructor(private val repositoryInterface: Repo
     }
 
     private val onlinePosts = ArrayList<String>()
-
+    private val onlineForecastPost = ArrayList<String>()
     @ViewModelScoped
     private suspend fun makeRequest(cityName: String) {
         job = CoroutineScope(Dispatchers.IO).launch {
@@ -56,6 +54,13 @@ class WeatherViewModel @Inject constructor(private val repositoryInterface: Repo
                         onlinePosts.add(currentVisibility)
                         onlinePosts.add(weatherDescription)
                         weatherData.value = onlinePosts
+                        for (weatherElement in 1..5) {
+                            onlineForecastPost.add(it.list[weatherElement].main?.temp?.roundToInt().toString() + "°C")
+                            onlineForecastPost.add("https://openweathermap.org/img/w/" + it.list[weatherElement].weather?.get(0)?.icon.toString() + ".png")
+                            val localDateTime = LocalDateTime.parse((it.list[weatherElement].dt_txt.toString().replace(" ", "T")))
+                            onlineForecastPost.add(localDateTime.hour.toString() + ":00")
+                        }
+                        forecastData.value = onlineForecastPost
                     }
                 } else {
                     onError("Error: ${response.message()}")

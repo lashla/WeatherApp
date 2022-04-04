@@ -1,6 +1,5 @@
 package com.example.weatherapp.ui
 
-import android.util.Log
 import com.example.weatherapp.api.OpenWeatherApi
 import com.example.weatherapp.api.WeatherResponse
 import retrofit2.Response
