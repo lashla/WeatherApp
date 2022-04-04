@@ -79,36 +79,36 @@ class WeatherDisplayFragment : Fragment(R.layout.weather_display_fragment) {
             imageView.visibility = ImageView.VISIBLE
         }
         viewModel.forecastData.observe(viewLifecycleOwner){
-            tvDayOfWeekTemp1.text = it[0]
-            Picasso.with(context)
-                .load(it[1])
-                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
-                .into(ivDayOfWeek1)
-            tvDayOfWeek1.text = it[2]
-            tvDayOfWeekTemp2.text = it[3]
-            Picasso.with(context)
-                .load(it[4])
-                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
-                .into(ivDayOfWeek2)
-            tvDayOfWeek2.text = it[5]
-            tvDayOfWeekTemp3.text = it[6]
-            Picasso.with(context)
-                .load(it[7])
-                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
-                .into(ivDayOfWeek3)
-            tvDayOfWeek3.text = it[8]
-            tvDayOfWeekTemp4.text = it[9]
-            Picasso.with(context)
-                .load(it[10])
-                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
-                .into(ivDayOfWeek4)
-            tvDayOfWeek4.text = it[11]
-            tvDayOfWeekTemp5.text = it[12]
-            Picasso.with(context)
-                .load(it[13])
-                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
-                .into(ivDayOfWeek5)
-            tvDayOfWeek5.text = it[14]
+//            tvDayOfWeekTemp1.text = it[0]
+//            Picasso.with(context)
+//                .load(it[1])
+//                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
+//                .into(ivDayOfWeek1)
+//            tvDayOfWeek1.text = it[2]
+//            tvDayOfWeekTemp2.text = it[3]
+//            Picasso.with(context)
+//                .load(it[4])
+//                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
+//                .into(ivDayOfWeek2)
+//            tvDayOfWeek2.text = it[5]
+//            tvDayOfWeekTemp3.text = it[6]
+//            Picasso.with(context)
+//                .load(it[7])
+//                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
+//                .into(ivDayOfWeek3)
+//            tvDayOfWeek3.text = it[8]
+//            tvDayOfWeekTemp4.text = it[9]
+//            Picasso.with(context)
+//                .load(it[10])
+//                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
+//                .into(ivDayOfWeek4)
+//            tvDayOfWeek4.text = it[11]
+//            tvDayOfWeekTemp5.text = it[12]
+//            Picasso.with(context)
+//                .load(it[13])
+//                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
+//                .into(ivDayOfWeek5)
+//            tvDayOfWeek5.text = it[14]
         }
     }
 

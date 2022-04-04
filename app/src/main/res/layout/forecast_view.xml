@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="60dp"
+    android:layout_height="70dp"
+    android:background="@drawable/rectangle_rounded_small"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:visibility="visible"
+        tools:text="@string/_0" />
+
+    <ImageView
+        android:id="@+id/ivTempOfTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:contentDescription="@string/weatherimage"
+        android:src="@drawable/ic_baseline_cancel_24"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="0dp"
+        tools:src="@drawable/ic_baseline_home_24" />
+
+    <TextView
+        android:id="@+id/tvTimeTemp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|center_horizontal|fill_horizontal"
+        android:layout_marginTop="4dp"
+        android:gravity="center|center_horizontal|fill_horizontal"
+        android:text="@string/_0_c"
+        android:textAlignment="center"
+        android:textColor="#0277BD"
+        android:textColorHint="@color/black"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="0dp"
+        tools:text="@string/_0" />
+
+</LinearLayout>

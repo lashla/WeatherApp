@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ForecastView">
+        <attr name="timeText" format="string"/>
+        <attr name="image" format="reference"/>
+        <attr name="temperatureText" format="string"/>
+    </declare-styleable>
+</resources>

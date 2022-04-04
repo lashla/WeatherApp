@@ -246,280 +246,63 @@
         app:layout_constraintStart_toStartOf="@+id/forecastView"
         app:layout_constraintTop_toTopOf="@+id/forecastView" />
 
-    <View
-        android:id="@+id/forecastViewContainer5"
-        android:layout_width="57dp"
-        android:layout_height="61dp"
-        android:background="@drawable/rectangle_rounded_small"
-        android:outlineAmbientShadowColor="@color/black"
-        android:outlineSpotShadowColor="@color/black"
+
+    <com.example.weatherapp.ui.ForecastView
+        android:id="@+id/forecastViewCon1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/forecastView"
-        app:layout_constraintEnd_toEndOf="@+id/tvDayOfWeek5"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvDayOfWeek5"
-        app:layout_constraintTop_toBottomOf="@+id/tvDayOfWeek5"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toStartOf="@+id/forecastViewCon2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="@+id/forecastView"
+        app:layout_constraintTop_toTopOf="@+id/forecastView" />
 
-    <View
-        android:id="@+id/forecastViewContainer1"
-        android:layout_width="57dp"
-        android:layout_height="61dp"
-        android:background="@drawable/rectangle_rounded_small"
-        android:outlineAmbientShadowColor="@color/black"
-        android:outlineSpotShadowColor="@color/black"
+    <com.example.weatherapp.ui.ForecastView
+        android:id="@+id/forecastViewCon2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/forecastView"
-        app:layout_constraintEnd_toEndOf="@+id/tvDayOfWeek1"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvDayOfWeek1"
-        app:layout_constraintTop_toBottomOf="@+id/tvDayOfWeek1"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toStartOf="@+id/forecastViewCon3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/forecastViewCon1"
+        app:layout_constraintTop_toTopOf="@+id/forecastView" />
 
-    <View
-        android:id="@+id/forecastViewContainer2"
-        android:layout_width="57dp"
-        android:layout_height="61dp"
-        android:background="@drawable/rectangle_rounded_small"
-        android:outlineAmbientShadowColor="@color/black"
-        android:outlineSpotShadowColor="@color/black"
+    <com.example.weatherapp.ui.ForecastView
+        android:id="@+id/forecastViewCon3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/forecastView"
-        app:layout_constraintEnd_toEndOf="@+id/tvDayOfWeek2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvDayOfWeek2"
-        app:layout_constraintTop_toBottomOf="@+id/tvDayOfWeek2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toStartOf="@+id/forecastViewCon4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/forecastViewCon2"
+        app:layout_constraintTop_toTopOf="@+id/forecastView" />
 
-    <View
-        android:id="@+id/forecastViewContainer3"
-        android:layout_width="57dp"
-        android:layout_height="61dp"
-        android:background="@drawable/rectangle_rounded_small"
-        android:outlineAmbientShadowColor="@color/black"
-        android:outlineSpotShadowColor="@color/black"
+    <com.example.weatherapp.ui.ForecastView
+        android:id="@+id/forecastViewCon4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/forecastView"
-        app:layout_constraintEnd_toEndOf="@+id/tvDayOfWeek3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvDayOfWeek3"
-        app:layout_constraintTop_toBottomOf="@+id/tvDayOfWeek3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toStartOf="@+id/forecastViewCon5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/forecastViewCon3"
+        app:layout_constraintTop_toTopOf="@+id/forecastView" />
 
-    <View
-        android:id="@+id/forecastViewContainer4"
-        android:layout_width="57dp"
-        android:layout_height="61dp"
-        android:background="@drawable/rectangle_rounded_small"
-        android:outlineAmbientShadowColor="@color/black"
-        android:outlineSpotShadowColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/forecastView"
-        app:layout_constraintEnd_toEndOf="@+id/tvDayOfWeek4"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvDayOfWeek4"
-        app:layout_constraintTop_toBottomOf="@+id/tvDayOfWeek4"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/tvDayOfWeekTemp4"
+    <com.example.weatherapp.ui.ForecastView
+        android:id="@+id/forecastViewCon5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/_0_c"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/forecastViewContainer4"
-        app:layout_constraintEnd_toEndOf="@+id/forecastViewContainer4"
-        app:layout_constraintStart_toStartOf="@+id/forecastViewContainer4"
-        app:layout_constraintTop_toBottomOf="@+id/ivDayOfWeek4" />
-
-    <TextView
-        android:id="@+id/tvDayOfWeekTemp3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/_0_c"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/forecastViewContainer3"
-        app:layout_constraintEnd_toEndOf="@+id/forecastViewContainer3"
-        app:layout_constraintStart_toStartOf="@+id/forecastViewContainer3"
-        app:layout_constraintTop_toBottomOf="@+id/ivDayOfWeek3" />
-
-    <ImageView
-        android:id="@+id/ivDayOfWeek2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/weatherimage"
-        android:src="@drawable/ic_launcher_background"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/forecastViewContainer2"
-        app:layout_constraintStart_toStartOf="@+id/forecastViewContainer2"
-        app:layout_constraintTop_toTopOf="@+id/forecastViewContainer2"
-        app:srcCompat="@drawable/ic_baseline_cancel_24" />
-
-    <ImageView
-        android:id="@+id/ivDayOfWeek4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/weatherimage"
-        android:src="@drawable/ic_launcher_background"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/forecastViewContainer4"
-        app:layout_constraintStart_toStartOf="@+id/forecastViewContainer4"
-        app:layout_constraintTop_toTopOf="@+id/forecastViewContainer4"
-        app:srcCompat="@drawable/ic_baseline_cancel_24" />
-
-    <TextView
-        android:id="@+id/tvDayOfWeekTemp1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/_0_c"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/forecastViewContainer1"
-        app:layout_constraintEnd_toEndOf="@+id/forecastViewContainer1"
-        app:layout_constraintStart_toStartOf="@+id/forecastViewContainer1"
-        app:layout_constraintTop_toBottomOf="@+id/ivDayOfWeek1" />
-
-    <TextView
-        android:id="@+id/tvDayOfWeekTemp2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/_0_c"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/forecastViewContainer2"
-        app:layout_constraintEnd_toEndOf="@+id/forecastViewContainer2"
-        app:layout_constraintStart_toStartOf="@+id/forecastViewContainer2"
-        app:layout_constraintTop_toBottomOf="@+id/ivDayOfWeek2" />
-
-    <ImageView
-        android:id="@+id/ivDayOfWeek1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/weatherimage"
-        android:src="@drawable/ic_launcher_background"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/forecastViewContainer1"
-        app:layout_constraintStart_toStartOf="@+id/forecastViewContainer1"
-        app:layout_constraintTop_toTopOf="@+id/forecastViewContainer1"
-        app:srcCompat="@drawable/ic_baseline_cancel_24" />
-
-    <ImageView
-        android:id="@+id/ivDayOfWeek3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/weatherimage"
-        android:src="@drawable/ic_launcher_background"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/forecastViewContainer3"
-        app:layout_constraintStart_toStartOf="@+id/forecastViewContainer3"
-        app:layout_constraintTop_toTopOf="@+id/forecastViewContainer3"
-        app:srcCompat="@drawable/ic_baseline_cancel_24" />
-
-    <TextView
-        android:id="@+id/tvDayOfWeek3"
-        android:layout_width="59dp"
-        android:layout_height="wrap_content"
-
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/forecastViewContainer3"
-        app:layout_constraintEnd_toStartOf="@+id/tvDayOfWeek4"
-        app:layout_constraintStart_toEndOf="@+id/tvDayOfWeek2"
-        app:layout_constraintTop_toBottomOf="@+id/tvForecast" />
-
-    <TextView
-        android:id="@+id/tvDayOfWeek4"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/forecastViewContainer4"
-        app:layout_constraintEnd_toStartOf="@+id/tvDayOfWeek5"
-        app:layout_constraintStart_toEndOf="@+id/tvDayOfWeek3"
-        app:layout_constraintTop_toBottomOf="@+id/tvForecast" />
-
-    <TextView
-        android:id="@+id/tvDayOfWeek5"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/forecastViewContainer5"
+        app:layout_constraintBottom_toBottomOf="@+id/forecastView"
         app:layout_constraintEnd_toEndOf="@+id/forecastView"
-        app:layout_constraintStart_toEndOf="@+id/tvDayOfWeek4"
-        app:layout_constraintTop_toBottomOf="@+id/tvForecast" />
-
-    <TextView
-        android:id="@+id/tvDayOfWeek1"
-        android:layout_width="59dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/forecastViewContainer1"
-        app:layout_constraintEnd_toStartOf="@+id/tvDayOfWeek2"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvForecast" />
-
-    <TextView
-        android:id="@+id/tvDayOfWeek2"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/forecastViewContainer2"
-        app:layout_constraintEnd_toStartOf="@+id/tvDayOfWeek3"
-        app:layout_constraintStart_toEndOf="@+id/tvDayOfWeek1"
-        app:layout_constraintTop_toBottomOf="@+id/tvForecast" />
-
-    <ImageView
-        android:id="@+id/ivDayOfWeek5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/weatherimage"
-        android:src="@drawable/ic_launcher_background"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/forecastViewContainer5"
-        app:layout_constraintStart_toStartOf="@+id/forecastViewContainer5"
-        app:layout_constraintTop_toTopOf="@+id/forecastViewContainer5"
-        app:srcCompat="@drawable/ic_baseline_cancel_24" />
-
-    <TextView
-        android:id="@+id/tvDayOfWeekTemp5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/_0_c"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/forecastViewContainer5"
-        app:layout_constraintEnd_toEndOf="@+id/forecastViewContainer5"
-        app:layout_constraintStart_toStartOf="@+id/forecastViewContainer5"
-        app:layout_constraintTop_toBottomOf="@+id/ivDayOfWeek5" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/forecastViewCon4"
+        app:layout_constraintTop_toTopOf="@+id/forecastView" />
 
     <TextView
         android:id="@+id/tvTemperature"
@@ -575,4 +358,11 @@
         app:layout_constraintEnd_toEndOf="@+id/windStatusText"
         app:layout_constraintStart_toStartOf="@+id/windStatusText"
         app:layout_constraintTop_toBottomOf="@+id/windStatusText" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
