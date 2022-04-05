@@ -35,6 +35,7 @@ class WeatherViewModel @Inject constructor(private val repositoryInterface: Repo
         job = CoroutineScope(Dispatchers.IO).launch {
             val response = repositoryInterface.getTempInfo(cityName, NetworkModule.provideRetrofitService(NetworkModule.provideRetrofit()))
             withContext(Dispatchers.Main){
+                Log.i("Request sent?", response.toString())
                 if (response.isSuccessful) {
                     response.body()?.let {
                         val requestCityName = it.city.name ?: "No city found"
@@ -54,7 +55,7 @@ class WeatherViewModel @Inject constructor(private val repositoryInterface: Repo
                         onlinePosts.add(currentVisibility)
                         onlinePosts.add(weatherDescription)
                         weatherData.value = onlinePosts
-                        for (weatherElement in 1..5) {
+                        for (weatherElement in 1..11) {
                             onlineForecastPost.add(it.list[weatherElement].main?.temp?.roundToInt().toString() + "°C")
                             onlineForecastPost.add("https://openweathermap.org/img/w/" + it.list[weatherElement].weather?.get(0)?.icon.toString() + ".png")
                             val localDateTime = LocalDateTime.parse((it.list[weatherElement].dt_txt.toString().replace(" ", "T")))

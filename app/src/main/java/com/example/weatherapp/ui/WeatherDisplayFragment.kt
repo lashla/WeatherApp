@@ -1,7 +1,13 @@
 package com.example.weatherapp.ui
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -10,27 +16,41 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.weather_display_fragment.*
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.math.log
 
 
 @AndroidEntryPoint
 class WeatherDisplayFragment : Fragment(R.layout.weather_display_fragment) {
 
     private lateinit var viewModel: WeatherViewModel
-
+    private var itemViewModel = ArrayList<String>()
+    val data = ArrayList<ItemViewModel>()
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initView()
         initViewModel()
         setupSearchButtons()
-
     }
 
+    private fun initRecyclerView(data: ArrayList<ItemViewModel>){
+        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        val adapter = CustomRecyclerAdapter(requireContext(), data)
+        recyclerView.adapter = adapter
+    }
 
 
     @RequiresApi(Build.VERSION_CODES.CUPCAKE)
@@ -79,6 +99,14 @@ class WeatherDisplayFragment : Fragment(R.layout.weather_display_fragment) {
             imageView.visibility = ImageView.VISIBLE
         }
         viewModel.forecastData.observe(viewLifecycleOwner){
+
+            for (element in 0..29 step 3) {
+                data.add(ItemViewModel(it[element], it[element+1], it[element+2]))
+            }
+
+            initRecyclerView(data)
+//            forecastViewCon1.attributeSourceResourceMap
+//            forecastViewCon1.initForecastDataView()
 //            tvDayOfWeekTemp1.text = it[0]
 //            Picasso.with(context)
 //                .load(it[1])
@@ -123,5 +151,8 @@ class WeatherDisplayFragment : Fragment(R.layout.weather_display_fragment) {
             textInput.visibility = View.INVISIBLE
             cancelSearchBtn.visibility = View.INVISIBLE
         }
+    }
+    private fun setupLocationWeatherButton(){
+
     }
 }

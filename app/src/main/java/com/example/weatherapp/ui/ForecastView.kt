@@ -7,12 +7,11 @@ import android.widget.LinearLayout
 import com.example.weatherapp.R
 import kotlinx.android.synthetic.main.forecast_view.view.*
 
+
 @SuppressLint("Recycle")
 class ForecastView(context: Context, attrs: AttributeSet): LinearLayout(context, attrs) {
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-    }
+    private var viewsCount = 10
 
     init {
         inflate(context, R.layout.forecast_view, this)
@@ -23,7 +22,7 @@ class ForecastView(context: Context, attrs: AttributeSet): LinearLayout(context,
         tvTime.text = attributes.getString(R.styleable.ForecastView_timeText)
         tvTimeTemp.text = attributes.getString(R.styleable.ForecastView_temperatureText)
         attributes.recycle()
-    }
 
+    }
 
 }
