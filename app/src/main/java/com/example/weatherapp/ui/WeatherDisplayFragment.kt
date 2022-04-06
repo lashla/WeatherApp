@@ -1,13 +1,12 @@
 package com.example.weatherapp.ui
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
-import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -15,35 +14,45 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.CancellationToken
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.weather_display_fragment.*
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.math.log
 
 
 @AndroidEntryPoint
 class WeatherDisplayFragment : Fragment(R.layout.weather_display_fragment) {
 
     private lateinit var viewModel: WeatherViewModel
-    private var itemViewModel = ArrayList<String>()
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var currentLocation: Location
+    private var geoCityName: String? = null
+
     val data = ArrayList<ItemViewModel>()
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initView()
         initViewModel()
         setupSearchButtons()
+        setupLocationWeatherButton()
     }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        setupFusedLocation()
+    }
+
 
     private fun initRecyclerView(data: ArrayList<ItemViewModel>){
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -105,38 +114,7 @@ class WeatherDisplayFragment : Fragment(R.layout.weather_display_fragment) {
             }
 
             initRecyclerView(data)
-//            forecastViewCon1.attributeSourceResourceMap
-//            forecastViewCon1.initForecastDataView()
-//            tvDayOfWeekTemp1.text = it[0]
-//            Picasso.with(context)
-//                .load(it[1])
-//                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
-//                .into(ivDayOfWeek1)
-//            tvDayOfWeek1.text = it[2]
-//            tvDayOfWeekTemp2.text = it[3]
-//            Picasso.with(context)
-//                .load(it[4])
-//                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
-//                .into(ivDayOfWeek2)
-//            tvDayOfWeek2.text = it[5]
-//            tvDayOfWeekTemp3.text = it[6]
-//            Picasso.with(context)
-//                .load(it[7])
-//                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
-//                .into(ivDayOfWeek3)
-//            tvDayOfWeek3.text = it[8]
-//            tvDayOfWeekTemp4.text = it[9]
-//            Picasso.with(context)
-//                .load(it[10])
-//                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
-//                .into(ivDayOfWeek4)
-//            tvDayOfWeek4.text = it[11]
-//            tvDayOfWeekTemp5.text = it[12]
-//            Picasso.with(context)
-//                .load(it[13])
-//                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
-//                .into(ivDayOfWeek5)
-//            tvDayOfWeek5.text = it[14]
+
         }
     }
 
@@ -153,6 +131,68 @@ class WeatherDisplayFragment : Fragment(R.layout.weather_display_fragment) {
         }
     }
     private fun setupLocationWeatherButton(){
+        locationButton.setOnClickListener {
+            if (!geoCityName.isNullOrEmpty()){
+                weatherDisplay(geoCityName!!)
+            } else {
+                Toast.makeText(requireContext(), "Turn on your location or give the app permissions", Toast.LENGTH_LONG).show()
+            }
 
+        }
+    }
+
+    private fun setupFusedLocation(){
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+
+        var isLocationGranted = true
+        val locationPermissionRequest = registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            isLocationGranted = when {
+                permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                    true
+                }
+                permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                    true
+                } else -> {
+                    false
+                }
+            }
+        }
+
+        locationPermissionRequest.launch(arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION))
+
+
+        when (PackageManager.PERMISSION_GRANTED) {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) -> {
+                val geocoder: Geocoder = Geocoder(context, Locale.getDefault())
+                isLocationGranted = true
+                fusedLocationClient.lastLocation
+                    .addOnSuccessListener {
+                        if (it != null){
+                            currentLocation = it
+                            geoCityName = geocoder.getFromLocation(currentLocation.latitude, currentLocation.longitude, 1)[0].locality
+                        } else {
+                            geoCityName = "New York"
+                            Toast.makeText(requireContext(), "Isn't possible to take your last location, setting to default", Toast.LENGTH_LONG).show()
+                        }
+                    }
+
+                    .addOnFailureListener {
+
+                    }
+
+
+            }
+            else -> {
+                requestPermissions(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
+                    1)
+            }
+        }
     }
 }

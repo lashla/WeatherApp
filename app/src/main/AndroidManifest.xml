@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.WeatherApp">
+
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">

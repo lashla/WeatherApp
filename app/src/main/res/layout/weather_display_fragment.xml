@@ -215,7 +215,7 @@
         android:id="@+id/windStatusText"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="88dp"
         android:text="@string/wind_status"
         android:textAlignment="viewStart"
         android:textColor="@color/white"
@@ -226,24 +226,51 @@
         app:layout_constraintTop_toBottomOf="@+id/view3" />
 
     <TextView
-        android:id="@+id/tvVisibilityValue"
+        android:id="@+id/tvAirPressureValue"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:text="@string/_5mps"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/AirPressureText"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/AirPressureText"
+        app:layout_constraintTop_toBottomOf="@+id/AirPressureText" />
+
+    <TextView
+        android:id="@+id/tvWindStatusValue"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="@string/_0"
+        android:text="@string/_5mps"
         android:textAlignment="viewStart"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/VisibilityText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/VisibilityText"
-        app:layout_constraintTop_toBottomOf="@+id/VisibilityText" />
+        app:layout_constraintEnd_toEndOf="@+id/windStatusText"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/windStatusText"
+        app:layout_constraintTop_toBottomOf="@+id/windStatusText" />
+
+    <TextView
+        android:id="@+id/humidityText"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:text="@string/humidity"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/windStatusText"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
 
     <TextView
         android:id="@+id/VisibilityText"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/visibility"
         android:textAlignment="viewStart"
         android:textColor="@color/white"
@@ -257,7 +284,7 @@
         android:id="@+id/AirPressureText"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/air_pressure"
         android:textAlignment="viewEnd"
         android:textColor="@color/white"
@@ -268,60 +295,31 @@
         app:layout_constraintTop_toBottomOf="@+id/tvHumidityValue" />
 
     <TextView
-        android:id="@+id/humidityText"
-        android:layout_width="195dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:text="@string/humidity"
-        android:textAlignment="viewEnd"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/windStatusText"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
-
-    <TextView
         android:id="@+id/tvHumidityValue"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:text="@string/_0"
         android:textAlignment="viewEnd"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/humidityText"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/humidityText"
         app:layout_constraintTop_toBottomOf="@+id/humidityText" />
 
     <TextView
-        android:id="@+id/tvAirPressureValue"
+        android:id="@+id/tvVisibilityValue"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/_5mps"
-        android:textAlignment="viewEnd"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/AirPressureText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/AirPressureText"
-        app:layout_constraintTop_toBottomOf="@+id/AirPressureText" />
-
-    <TextView
-        android:id="@+id/tvWindStatusValue"
-        android:layout_width="195dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/_5mps"
+        android:text="@string/_0"
         android:textAlignment="viewStart"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/windStatusText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/windStatusText"
-        app:layout_constraintTop_toBottomOf="@+id/windStatusText" />
+        app:layout_constraintEnd_toEndOf="@+id/VisibilityText"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/VisibilityText"
+        app:layout_constraintTop_toBottomOf="@+id/VisibilityText" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
