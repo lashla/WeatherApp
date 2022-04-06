@@ -51,8 +51,16 @@ class WeatherDisplayFragment : Fragment(R.layout.weather_display_fragment) {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         setupFusedLocation()
+        getWeatherInfoFromGps(geoCityName)
     }
 
+    private fun getWeatherInfoFromGps(geoCityName: String?){
+        if (!geoCityName.isNullOrEmpty()){
+            weatherDisplay(geoCityName)
+        } else {
+            Toast.makeText(requireContext(), "Turn on your location or give the app permissions", Toast.LENGTH_LONG).show()
+        }
+    }
 
     private fun initRecyclerView(data: ArrayList<ItemViewModel>){
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -106,6 +114,7 @@ class WeatherDisplayFragment : Fragment(R.layout.weather_display_fragment) {
             enteredCityName.visibility = TextView.VISIBLE
             tvTemperature.visibility = TextView.VISIBLE
             imageView.visibility = ImageView.VISIBLE
+            it.clear()
         }
         viewModel.forecastData.observe(viewLifecycleOwner){
 
@@ -114,7 +123,7 @@ class WeatherDisplayFragment : Fragment(R.layout.weather_display_fragment) {
             }
 
             initRecyclerView(data)
-
+            it.clear()
         }
     }
 
@@ -132,12 +141,7 @@ class WeatherDisplayFragment : Fragment(R.layout.weather_display_fragment) {
     }
     private fun setupLocationWeatherButton(){
         locationButton.setOnClickListener {
-            if (!geoCityName.isNullOrEmpty()){
-                weatherDisplay(geoCityName!!)
-            } else {
-                Toast.makeText(requireContext(), "Turn on your location or give the app permissions", Toast.LENGTH_LONG).show()
-            }
-
+            getWeatherInfoFromGps(geoCityName)
         }
     }
 

@@ -1,17 +1,13 @@
 package com.example.weatherapp.ui
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.location.Geocoder
-import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.weatherapp.R
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -30,11 +26,11 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setupNavigationAndActionBars() {
-//        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.navigation)
-//        val navHostFragment =
-//            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
-//        val navController: NavController = navHostFragment.navController
-//        bottomNavigationView.setupWithNavController(navController)
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.navigation)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
+        val navController: NavController = navHostFragment.navController
+        bottomNavigationView.setupWithNavController(navController)
         window.decorView.apply {
             systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         }
