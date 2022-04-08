@@ -57,6 +57,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/cancelSearchBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/cardview_shadow_end_color"
+        android:backgroundTint="@color/black"
+        android:contentDescription="@android:string/cancel"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:src="@drawable/ic_baseline_cancel_24"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@id/searchView"
+        app:layout_constraintHorizontal_bias="0.973"
+        app:layout_constraintStart_toEndOf="@id/textInput"
+        app:layout_constraintTop_toTopOf="@id/searchView" />
+
     <View
         android:id="@+id/searchView"
         android:layout_width="match_parent"
@@ -89,23 +107,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/searchView"
         app:layout_constraintTop_toTopOf="@+id/searchView" />
-
-    <ImageButton
-        android:id="@+id/cancelSearchBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/cardview_shadow_end_color"
-        android:contentDescription="@android:string/cancel"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        android:src="@drawable/ic_baseline_cancel_24"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@id/searchView"
-        app:layout_constraintHorizontal_bias="0.973"
-        app:layout_constraintStart_toEndOf="@id/textInput"
-        app:layout_constraintTop_toTopOf="@id/searchView" />
 
 
     <ProgressBar

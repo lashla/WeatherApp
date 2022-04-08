@@ -22,9 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.tasks.CancellationToken
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.weather_display_fragment.*
@@ -40,8 +38,9 @@ class WeatherDisplayFragment : Fragment(R.layout.weather_display_fragment) {
     private var geoCityName: String? = null
 
     val data = ArrayList<ItemViewModel>()
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initView()
         initViewModel()
         setupSearchButtons()
@@ -57,8 +56,6 @@ class WeatherDisplayFragment : Fragment(R.layout.weather_display_fragment) {
     private fun getWeatherInfoFromGps(geoCityName: String?){
         if (!geoCityName.isNullOrEmpty()){
             weatherDisplay(geoCityName)
-        } else {
-            Toast.makeText(requireContext(), "Turn on your location or give the app permissions", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -98,32 +95,35 @@ class WeatherDisplayFragment : Fragment(R.layout.weather_display_fragment) {
     private fun initViewModel() {
         viewModel = ViewModelProvider(this)[WeatherViewModel::class.java]
         viewModel.weatherData.observe(viewLifecycleOwner) {
-            enteredCityName.text = it[0]
-            tvTemperature.text = it[1]
-            Picasso.with(context)
-                .load(it[2])
-                .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
-                .into(imageView)
-            tvHumidityValue.text = it[3]
-            tvAirPressureValue.text = it[4]
-            tvWindStatusValue.text = it[5]
-            tvVisibilityValue.text = it[6]
-            weatherDiscription.text = it[7]
-            progressBar.visibility = ProgressBar.INVISIBLE
-            weatherDiscription.visibility = TextView.VISIBLE
-            enteredCityName.visibility = TextView.VISIBLE
-            tvTemperature.visibility = TextView.VISIBLE
-            imageView.visibility = ImageView.VISIBLE
-            it.clear()
+            if (it.isNotEmpty()) {
+                enteredCityName.text = it[0]
+                tvTemperature.text = it[1]
+                Picasso.with(context)
+                    .load(it[2])
+                    .error(androidx.constraintlayout.widget.R.drawable.abc_btn_check_to_on_mtrl_000)
+                    .into(imageView)
+                tvHumidityValue.text = it[3]
+                tvAirPressureValue.text = it[4]
+                tvWindStatusValue.text = it[5]
+                tvVisibilityValue.text = it[6]
+                weatherDiscription.text = it[7]
+                progressBar.visibility = ProgressBar.INVISIBLE
+                weatherDiscription.visibility = TextView.VISIBLE
+                enteredCityName.visibility = TextView.VISIBLE
+                tvTemperature.visibility = TextView.VISIBLE
+                imageView.visibility = ImageView.VISIBLE
+                it.clear()}
+
         }
         viewModel.forecastData.observe(viewLifecycleOwner){
+            if (it.isNotEmpty()){
+                for (element in 0..29 step 3) {
+                    data.add(ItemViewModel(it[element], it[element+1], it[element+2]))
+                }
 
-            for (element in 0..29 step 3) {
-                data.add(ItemViewModel(it[element], it[element+1], it[element+2]))
+                initRecyclerView(data)
+                it.clear()
             }
-
-            initRecyclerView(data)
-            it.clear()
         }
     }
 
@@ -174,7 +174,7 @@ class WeatherDisplayFragment : Fragment(R.layout.weather_display_fragment) {
                 requireContext(),
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) -> {
-                val geocoder: Geocoder = Geocoder(context, Locale.getDefault())
+                val geocoder = Geocoder(context, Locale.getDefault())
                 isLocationGranted = true
                 fusedLocationClient.lastLocation
                     .addOnSuccessListener {

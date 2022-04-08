@@ -9,10 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.withContext
-import kotlin.contracts.contract
+import javax.inject.Inject
 
-class CustomRecyclerAdapter(private val context: Context, private val mList: MutableList<ItemViewModel>): RecyclerView.Adapter<CustomRecyclerAdapter.ViewHolder>() {
+class CustomRecyclerAdapter @Inject constructor(private val context: Context, private val mList: MutableList<ItemViewModel>): RecyclerView.Adapter<CustomRecyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

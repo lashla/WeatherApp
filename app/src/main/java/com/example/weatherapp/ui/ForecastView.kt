@@ -7,11 +7,7 @@ import android.widget.LinearLayout
 import com.example.weatherapp.R
 import kotlinx.android.synthetic.main.forecast_view.view.*
 
-
-@SuppressLint("Recycle")
 class ForecastView(context: Context, attrs: AttributeSet): LinearLayout(context, attrs) {
-
-    private var viewsCount = 10
 
     init {
         inflate(context, R.layout.forecast_view, this)
